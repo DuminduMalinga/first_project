@@ -1,6 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'Income_screen.dart';
 import 'Expence_screen.dart';
+import 'Investments_screen.dart';
+import 'Meetings_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   @override
@@ -47,19 +51,22 @@ class DashboardScreen extends StatelessWidget {
                   'Investments',
                   Icons.trending_up,
                   () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Investments clicked')),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => InvestmentScreen()),
                     );
                   },
                 ),
+
                 _buildDashboardButton(
                   context,
                   'Meetings',
-                  Icons.event_note,
+                  Icons.trending_up,
                   () {
-                    ScaffoldMessenger.of(
+                    Navigator.push(
                       context,
-                    ).showSnackBar(SnackBar(content: Text('Meetings clicked')));
+                      MaterialPageRoute(builder: (_) => MeetingsScreen()),
+                    );
                   },
                 ),
               ],
