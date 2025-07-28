@@ -36,6 +36,13 @@ class _SignupScreenState extends State<SignupScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            SizedBox(height: 40),
+            Text(
+              //SizedBox(height: 40),
+              "Let's create your Personal Assistant",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            ),
+            SizedBox(height: 30),
             TextField(
               controller: emailController,
               decoration: InputDecoration(labelText: 'Email'),
@@ -50,8 +57,22 @@ class _SignupScreenState extends State<SignupScreen> {
               decoration: InputDecoration(labelText: 'Re-enter Password'),
               obscureText: true,
             ),
-            SizedBox(height: 20),
-            ElevatedButton(onPressed: signUp, child: Text('Create Account')),
+            SizedBox(height: 50),
+            ElevatedButton(
+              onPressed: signUp,
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(30, 50), // width: full, height: 50
+                backgroundColor: Colors.white,
+              ),
+              child: Text(
+                'Create Account',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
           ],
         ),
       ),
