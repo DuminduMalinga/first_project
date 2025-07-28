@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Income_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   @override
@@ -22,14 +23,42 @@ class DashboardScreen extends StatelessWidget {
               mainAxisSpacing: 16,
               physics: NeverScrollableScrollPhysics(),
               children: [
-                _buildDashboardButton(context, 'Expenses', Icons.money_off),
-                _buildDashboardButton(context, 'Income', Icons.attach_money),
+                _buildDashboardButton(context, 'Expenses', Icons.money_off, () {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text('Expenses clicked')));
+                }),
+                _buildDashboardButton(
+                  context,
+                  'Income',
+                  Icons.attach_money,
+                  () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => IncomeScreen()),
+                    );
+                  },
+                ),
                 _buildDashboardButton(
                   context,
                   'Investments',
                   Icons.trending_up,
+                  () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Investments clicked')),
+                    );
+                  },
                 ),
-                _buildDashboardButton(context, 'Meetings', Icons.event_note),
+                _buildDashboardButton(
+                  context,
+                  'Meetings',
+                  Icons.event_note,
+                  () {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text('Meetings clicked')));
+                  },
+                ),
               ],
             ),
           ],
@@ -42,13 +71,10 @@ class DashboardScreen extends StatelessWidget {
     BuildContext context,
     String title,
     IconData icon,
+    VoidCallback onTap,
   ) {
     return ElevatedButton(
-      onPressed: () {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('$title clicked')));
-      },
+      onPressed: onTap,
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.all(16),
         backgroundColor: Colors.blue.shade600,

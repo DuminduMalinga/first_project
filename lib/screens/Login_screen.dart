@@ -13,7 +13,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void login() {
     // Placeholder logic
-    if (emailController.text == "test@test.com" &&
+    if (emailController.text == "test@.com" &&
         passwordController.text == "123456") {
       Navigator.push(context, MaterialPageRoute(builder: (_) => HomeScreen()));
     } else {
