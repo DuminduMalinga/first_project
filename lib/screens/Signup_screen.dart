@@ -8,9 +8,20 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   void signUp() {
-    // Placeholder logic
+    String password = passwordController.text.trim();
+    String confirmPassword = confirmPasswordController.text.trim();
+
+    if (password != confirmPassword) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Passwords do not match!')));
+      return;
+    }
+
+    // Proceed with sign up logic (placeholder)
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text('Account created!')));
@@ -32,6 +43,11 @@ class _SignupScreenState extends State<SignupScreen> {
             TextField(
               controller: passwordController,
               decoration: InputDecoration(labelText: 'Password'),
+              obscureText: true,
+            ),
+            TextField(
+              controller: confirmPasswordController,
+              decoration: InputDecoration(labelText: 'Re-enter Password'),
               obscureText: true,
             ),
             SizedBox(height: 20),
