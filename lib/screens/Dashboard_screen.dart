@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Income_screen.dart';
+import 'Expence_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   @override
@@ -24,10 +25,12 @@ class DashboardScreen extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               children: [
                 _buildDashboardButton(context, 'Expenses', Icons.money_off, () {
-                  ScaffoldMessenger.of(
+                  Navigator.push(
                     context,
-                  ).showSnackBar(SnackBar(content: Text('Expenses clicked')));
+                    MaterialPageRoute(builder: (_) => ExpenseScreen()),
+                  );
                 }),
+
                 _buildDashboardButton(
                   context,
                   'Income',
