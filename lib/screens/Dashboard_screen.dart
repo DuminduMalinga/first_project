@@ -7,6 +7,8 @@ import 'Investments_screen.dart';
 import 'Meetings_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // For date formatting
 
 class IncomeScreen extends StatefulWidget {
+  const IncomeScreen({super.key});
+
   @override
   _IncomeScreenState createState() => _IncomeScreenState();
 }
@@ -116,10 +118,10 @@ class _IncomeScreenState extends State<IncomeScreen> {
             SizedBox(height: 30),
             ElevatedButton(
               onPressed: saveIncome,
-              child: Text('OK'),
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(double.infinity, 50),
               ),
+              child: Text('OK'),
             ),
           ],
         ),

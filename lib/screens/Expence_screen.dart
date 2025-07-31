@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ExpenseScreen extends StatefulWidget {
+  const ExpenseScreen({super.key});
+
   @override
   _ExpenseScreenState createState() => _ExpenseScreenState();
 }
@@ -116,10 +118,10 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
             SizedBox(height: 30),
             ElevatedButton(
               onPressed: saveExpense,
-              child: Text('OK'),
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(double.infinity, 50),
               ),
+              child: Text('OK'),
             ),
           ],
         ),

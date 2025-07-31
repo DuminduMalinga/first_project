@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MeetingsScreen extends StatefulWidget {
+  const MeetingsScreen({super.key});
+
   @override
   _MeetingsScreenState createState() => _MeetingsScreenState();
 }
