@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -16,8 +15,22 @@ class _SignupScreenState extends State<SignupScreen> {
   final confirmPasswordController = TextEditingController();
 
   void signUp() {
+    String name = nameController.text.trim();
+    String email = emailController.text.trim();
+    String phoneNumber = phonenumberController.text.trim();
     String password = passwordController.text.trim();
     String confirmPassword = confirmPasswordController.text.trim();
+
+    if (name.isEmpty ||
+        email.isEmpty ||
+        phoneNumber.isEmpty ||
+        password.isEmpty ||
+        confirmPassword.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Please fill all fields')));
+      return;
+    }
 
     if (password != confirmPassword) {
       ScaffoldMessenger.of(
@@ -124,10 +137,13 @@ class _SignupScreenState extends State<SignupScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                      icon: Icon(
-                        Icons.g_mobiledata,
-                        size: 40,
-                        color: Colors.red,
+                      icon: Container(
+                        height: 32,
+                        width: 32,
+                        child: Image.asset(
+                          'lib/icons/google.png',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       onPressed: signUpWithGoogle,
                       tooltip: 'Sign up with Google',

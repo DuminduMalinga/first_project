@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'Income_screen.dart';
 import 'Expence_screen.dart';
