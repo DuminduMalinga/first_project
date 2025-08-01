@@ -14,8 +14,8 @@ class _LoginScreenState extends State<LoginScreen>
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  late AnimationController _controller;
-  late Animation<double> _fadeanimation;
+  late final AnimationController _controller;
+  late final Animation<double> _fadeanimation;
 
   @override
   void initState() {
@@ -131,16 +131,17 @@ class _LoginScreenState extends State<LoginScreen>
                         child: Text(
                           'Login',
                           style: TextStyle(
-                            // fontSize: 16,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black87,
                           ),
                         ),
                       ),
                       SizedBox(height: 20),
                       Text(
                         "Or",
-                        style: TextStyle(fontSize: 16, color: Colors.redAccent),
+                        style: TextStyle(fontSize: 20, color: Colors.redAccent),
+                        textAlign: TextAlign.center,
                       ),
 
                       SizedBox(height: 20),
