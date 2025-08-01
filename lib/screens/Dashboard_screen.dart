@@ -3,6 +3,7 @@ import 'Income_screen.dart';
 import 'Expence_screen.dart';
 import 'Investments_screen.dart';
 import 'Meetings_screen.dart';
+import 'Budget_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -78,6 +79,16 @@ class DashboardScreen extends StatelessWidget {
                       MaterialPageRoute(builder: (_) => MeetingsScreen()),
                     ),
                   ),
+                  _buildDashboardCard(
+                    context,
+                    title: 'Budget',
+                    icon: Icons.account_balance_wallet,
+                    backgroundColor: const Color.fromARGB(255, 208, 171, 5),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => BudgetScreen()),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -86,56 +97,6 @@ class DashboardScreen extends StatelessWidget {
       ),
     );
   }
-  //             physics: NeverScrollableScrollPhysics(),
-  //             children: [
-  //               _buildDashboardButton(context, 'Expenses', Icons.money_off, () {
-  //                 Navigator.push(
-  //                   context,
-  //                   MaterialPageRoute(builder: (_) => ExpenseScreen()),
-  //                 );
-  //               }),
-
-  //               _buildDashboardButton(
-  //                 context,
-  //                 'Income',
-  //                 Icons.attach_money,
-  //                 () {
-  //                   Navigator.push(
-  //                     context,
-  //                     MaterialPageRoute(builder: (_) => IncomeScreen()),
-  //                   );
-  //                 },
-  //               ),
-  //               _buildDashboardButton(
-  //                 context,
-  //                 'Investments',
-  //                 Icons.trending_up,
-  //                 () {
-  //                   Navigator.push(
-  //                     context,
-  //                     MaterialPageRoute(builder: (_) => InvestmentScreen()),
-  //                   );
-  //                 },
-  //               ),
-
-  //               _buildDashboardButton(
-  //                 context,
-  //                 'Meetings',
-  //                 Icons.trending_up,
-  //                 () {
-  //                   Navigator.push(
-  //                     context,
-  //                     MaterialPageRoute(builder: (_) => MeetingsScreen()),
-  //                   );
-  //                 },
-  //               ),
-  //             ],
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget _buildDashboardCard(
     BuildContext context, {
@@ -143,6 +104,7 @@ class DashboardScreen extends StatelessWidget {
     required IconData icon,
     required Color backgroundColor,
     required VoidCallback onTap,
+    TextStyle? textStyle,
   }) {
     return Card(
       elevation: 4,
@@ -158,13 +120,14 @@ class DashboardScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 36, color: Colors.white),
+              Icon(icon, size: 36, color: Colors.black87),
               SizedBox(height: 12),
               Text(
                 title,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
+                  fontSize: 16,
                 ),
               ),
             ],
