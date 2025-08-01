@@ -31,7 +31,7 @@ class _IncomeScreenState extends State<IncomeScreen>
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
-    _fadeanimation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    _fadeanimation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
     _controller.forward();
   }
 
@@ -105,9 +105,22 @@ class _IncomeScreenState extends State<IncomeScreen>
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text('Add Income'),
+        title: Text(
+          'Add Income',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline, color: Colors.white),
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Track Your Income Source Here')),
+              );
+            },
+          ),
+        ],
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -131,14 +144,34 @@ class _IncomeScreenState extends State<IncomeScreen>
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const Text(
+                        'Add Your Income',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.teal,
+                        ),
+                      ),
+                      SizedBox(height: 20),
                       DropdownButtonFormField<String>(
                         value: selectedIncomeType,
                         hint: Text('Select Income Type'),
                         items: incomeTypes.map((type) {
                           return DropdownMenuItem(
                             value: type,
-                            child: Text(type),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.monetization_on,
+                                  color: Colors.redAccent,
+                                  size: 20,
+                                ),
+                                SizedBox(width: 10),
+                                Text(type),
+                              ],
+                            ),
                           );
                         }).toList(),
                         onChanged: (value) {
@@ -148,20 +181,32 @@ class _IncomeScreenState extends State<IncomeScreen>
                         },
                         decoration: InputDecoration(
                           labelText: 'Income Type',
+                          prefixIcon: Icon(
+                            Icons.category,
+                            color: Colors.black87,
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
+                          filled: true,
+                          fillColor: Colors.teal[50],
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       TextField(
                         controller: amountController,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: 'Amount',
+                          prefixIcon: Icon(
+                            Icons.attach_money,
+                            color: Colors.black87,
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
+                          filled: true,
+                          fillColor: Colors.teal[50],
                         ),
                       ),
                       SizedBox(height: 16),
@@ -170,9 +215,15 @@ class _IncomeScreenState extends State<IncomeScreen>
                         child: InputDecorator(
                           decoration: InputDecoration(
                             labelText: 'Date',
+                            prefixIcon: Icon(
+                              Icons.calendar_today,
+                              color: Colors.black87,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
+                            filled: true,
+                            fillColor: Colors.teal[50],
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -189,12 +240,12 @@ class _IncomeScreenState extends State<IncomeScreen>
                                       : Colors.grey,
                                 ),
                               ),
-                              Icon(Icons.calendar_today, color: Colors.grey),
+                              Icon(Icons.arrow_drop_down, color: Colors.grey),
                             ],
                           ),
                         ),
                       ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       ElevatedButton(
                         onPressed: saveIncome,
                         style: ElevatedButton.styleFrom(
@@ -203,9 +254,10 @@ class _IncomeScreenState extends State<IncomeScreen>
                             borderRadius: BorderRadius.circular(15),
                           ),
                           minimumSize: Size(double.infinity, 50),
+                          elevation: 5,
                         ),
-                        child: Text(
-                          'OK',
+                        child: const Text(
+                          'Save Income',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
