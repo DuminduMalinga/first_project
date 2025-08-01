@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen>
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),
-                          minimumSize: Size(double.infinity, 50), // full width
+                          //minimumSize: Size(double.infinity, 50), // full width
                         ),
                         child: Text(
                           'Login',

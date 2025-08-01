@@ -35,6 +35,9 @@ dependencies:
   firebase_core: ^2.27.0
   firebase_auth: ^4.17.0
   cloud_firestore: ^4.14.0
+  font_awesome_flutter: ^10.8.0
+  community_material_icon: ^5.4.55
+  
 
 
 
