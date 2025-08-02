@@ -160,10 +160,11 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
                   children: [
                     const Text(
                       'Add Expense',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.teal,
+                        color: Color.fromARGB(255, 222, 126, 7),
                       ),
                     ),
                     const SizedBox(height: 20),

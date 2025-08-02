@@ -124,10 +124,11 @@ class _GoalScreenState extends State<GoalScreen>
                     Center(
                       child: Text(
                         'Set Your Savings or Investments Goals',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 21,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 160, 97, 2),
+                          color: Color.fromARGB(255, 159, 73, 8),
                         ),
                       ),
                     ),
@@ -145,7 +146,7 @@ class _GoalScreenState extends State<GoalScreen>
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                         ),
                         filled: true,
-                        fillColor: Colors.teal,
+                        fillColor: Color.fromARGB(255, 240, 226, 186),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -166,7 +167,7 @@ class _GoalScreenState extends State<GoalScreen>
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                         ),
                         filled: true,
-                        fillColor: Colors.teal,
+                        fillColor: Color.fromARGB(255, 240, 226, 186),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -247,7 +248,7 @@ class _GoalScreenState extends State<GoalScreen>
                           borderRadius: BorderRadius.all(Radius.circular(15)),
                         ),
                         filled: true,
-                        fillColor: Colors.teal,
+                        fillColor: Color.fromARGB(255, 240, 226, 186),
                       ),
                       onSubmitted: (value) =>
                           _addContribution(double.tryParse(value) ?? 0.0),
