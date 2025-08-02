@@ -57,7 +57,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
               surface: Colors.black,
               onSurface: Colors.white,
             ),
-            dialogBackgroundColor: Colors.black87,
+            dialogTheme: DialogThemeData(backgroundColor: Colors.black87),
           ),
           child: child!,
         );

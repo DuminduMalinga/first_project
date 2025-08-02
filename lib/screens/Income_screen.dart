@@ -58,7 +58,7 @@ class _IncomeScreenState extends State<IncomeScreen>
               surface: Colors.grey[800]!,
               onSurface: Colors.white,
             ),
-            dialogBackgroundColor: Colors.black87,
+            dialogTheme: DialogThemeData(backgroundColor: Colors.black87),
           ),
           child: child!,
         );

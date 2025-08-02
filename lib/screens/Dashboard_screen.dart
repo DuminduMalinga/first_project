@@ -6,7 +6,6 @@ import 'Expence_screen.dart';
 import 'Investments_screen.dart';
 import 'Meetings_screen.dart';
 import 'Budget_screen.dart';
-import 'Goal_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});

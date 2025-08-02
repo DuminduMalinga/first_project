@@ -131,10 +131,7 @@ class _BudgetScreenState extends State<BudgetScreen>
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           labelText: 'Enter Your Budget Amount',
-                          prefixIcon: const Icon(
-                            Icons.wallet,
-                            color: Colors.orange,
-                          ),
+                          prefixIcon: Icon(Icons.wallet, color: Colors.orange),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(15)),
                           ),
