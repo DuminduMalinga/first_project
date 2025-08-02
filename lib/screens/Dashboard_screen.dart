@@ -1,9 +1,12 @@
+import 'package:first_project/screens/Goal_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'Income_screen.dart';
 import 'Expence_screen.dart';
 import 'Investments_screen.dart';
 import 'Meetings_screen.dart';
 import 'Budget_screen.dart';
+import 'Goal_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -25,11 +28,13 @@ class DashboardScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 20),
             Text(
               'Hello You are Welcome',
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             SizedBox(height: 24),
             Expanded(
@@ -89,6 +94,16 @@ class DashboardScreen extends StatelessWidget {
                       MaterialPageRoute(builder: (_) => BudgetScreen()),
                     ),
                   ),
+                  _buildDashboardCard(
+                    context,
+                    title: 'Goal',
+                    icon: FontAwesomeIcons.bullseye,
+                    backgroundColor: const Color.fromARGB(255, 191, 109, 3),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => GoalScreen()),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -104,7 +119,7 @@ class DashboardScreen extends StatelessWidget {
     required IconData icon,
     required Color backgroundColor,
     required VoidCallback onTap,
-    TextStyle? textStyle,
+    //TextStyle? textStyle,
   }) {
     return Card(
       elevation: 4,
