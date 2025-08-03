@@ -11,6 +11,7 @@ class IncomeScreen extends StatefulWidget {
 class _IncomeScreenState extends State<IncomeScreen>
     with SingleTickerProviderStateMixin {
   final amountController = TextEditingController();
+  final descriptionController = TextEditingController();
   String? selectedIncomeType;
   DateTime? selectedDate;
 
@@ -181,15 +182,12 @@ class _IncomeScreenState extends State<IncomeScreen>
                         },
                         decoration: InputDecoration(
                           labelText: 'Income Type',
-                          prefixIcon: Icon(
-                            Icons.category,
-                            color: Colors.black87,
-                          ),
+                          prefixIcon: Icon(Icons.category, color: Colors.teal),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
                           filled: true,
-                          fillColor: Colors.teal[50],
+                          fillColor: Color.fromARGB(255, 240, 226, 186),
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -200,13 +198,13 @@ class _IncomeScreenState extends State<IncomeScreen>
                           labelText: 'Amount',
                           prefixIcon: Icon(
                             Icons.attach_money,
-                            color: Colors.black87,
+                            color: Colors.teal,
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
                           filled: true,
-                          fillColor: Colors.teal[50],
+                          fillColor: Color.fromARGB(255, 240, 226, 186),
                         ),
                       ),
                       SizedBox(height: 16),
@@ -217,13 +215,13 @@ class _IncomeScreenState extends State<IncomeScreen>
                             labelText: 'Date',
                             prefixIcon: Icon(
                               Icons.calendar_today,
-                              color: Colors.black87,
+                              color: Colors.teal,
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
                             filled: true,
-                            fillColor: Colors.teal[50],
+                            fillColor: Color.fromARGB(255, 240, 226, 186),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -245,6 +243,27 @@ class _IncomeScreenState extends State<IncomeScreen>
                           ),
                         ),
                       ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: descriptionController,
+                        decoration: const InputDecoration(
+                          labelText: 'Description(optional)',
+                          prefixIcon: Icon(Icons.note, color: Colors.teal),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                          ),
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 240, 226, 186),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.teal),
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.teal),
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                          ),
+                        ),
+                      ),
                       const SizedBox(height: 30),
                       ElevatedButton(
                         onPressed: saveIncome,
@@ -261,7 +280,7 @@ class _IncomeScreenState extends State<IncomeScreen>
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black87,
                           ),
                         ),
                       ),

@@ -173,14 +173,6 @@ class _GoalScreenState extends State<GoalScreen>
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: _setGoal,
-                      child: const Text(
-                        'Set Goal',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.teal,
                         padding: const EdgeInsets.symmetric(
@@ -189,6 +181,14 @@ class _GoalScreenState extends State<GoalScreen>
                         ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      child: const Text(
+                        'Set Goal',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
                         ),
                       ),
                     ),

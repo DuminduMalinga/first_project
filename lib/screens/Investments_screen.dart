@@ -228,14 +228,6 @@ class _InvestmentScreenState extends State<InvestmentScreen>
                     Center(
                       child: ElevatedButton(
                         onPressed: _saveInvestment,
-                        child: const Text(
-                          'Save Investment',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
-                        ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.teal,
                           padding: const EdgeInsets.symmetric(
@@ -244,6 +236,14 @@ class _InvestmentScreenState extends State<InvestmentScreen>
                           ),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadiusGeometry.circular(15),
+                          ),
+                        ),
+                        child: const Text(
+                          'Save Investment',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
                           ),
                         ),
                       ),
