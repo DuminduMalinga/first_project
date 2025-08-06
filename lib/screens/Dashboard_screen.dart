@@ -6,107 +6,134 @@ import 'Expence_screen.dart';
 import 'Investments_screen.dart';
 import 'Meetings_screen.dart';
 import 'Budget_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    // final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text('Dashboard'),
         centerTitle: true,
-        backgroundColor: colorScheme.primary,
-        foregroundColor: colorScheme.onPrimary,
-        elevation: 2,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 20),
-            Text(
-              'Hello You are Welcome',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.teal, Colors.tealAccent],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 100, 16, 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Hello You are Welcome',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            SizedBox(height: 24),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                children: [
-                  _buildDashboardCard(
-                    context,
-                    title: 'Expenses',
-                    icon: Icons.money_off,
-                    backgroundColor: Colors.red.shade400,
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => ExpenseScreen()),
+              const SizedBox(height: 40),
+              Center(
+                child: Text(
+                  'Daily Planner',
+                  style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
                     ),
                   ),
-                  _buildDashboardCard(
-                    context,
-                    title: 'Income',
-                    icon: Icons.attach_money,
-                    backgroundColor: Colors.green.shade600,
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => IncomeScreen()),
-                    ),
-                  ),
-                  _buildDashboardCard(
-                    context,
-                    title: 'Investments',
-                    icon: Icons.trending_up,
-                    backgroundColor: Colors.blue.shade600,
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => InvestmentScreen()),
-                    ),
-                  ),
-                  _buildDashboardCard(
-                    context,
-                    title: 'Meetings',
-                    icon: Icons.group,
-                    backgroundColor: Colors.purple.shade600,
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => MeetingsScreen()),
-                    ),
-                  ),
-                  _buildDashboardCard(
-                    context,
-                    title: 'Budget',
-                    icon: Icons.account_balance_wallet,
-                    backgroundColor: const Color.fromARGB(255, 208, 171, 5),
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => BudgetScreen()),
-                    ),
-                  ),
-                  _buildDashboardCard(
-                    context,
-                    title: 'Goal',
-                    icon: FontAwesomeIcons.bullseye,
-                    backgroundColor: const Color.fromARGB(255, 191, 109, 3),
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => GoalScreen()),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
+
+              const SizedBox(height: 40),
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  //shrinkWrap: true,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: false,
+
+                  children: [
+                    _buildDashboardCard(
+                      context,
+                      title: 'Expenses',
+                      icon: Icons.money_off,
+                      backgroundColor: Colors.red.shade400,
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => ExpenseScreen()),
+                      ),
+                    ),
+                    _buildDashboardCard(
+                      context,
+                      title: 'Income',
+                      icon: Icons.attach_money,
+                      backgroundColor: Colors.green.shade600,
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => IncomeScreen()),
+                      ),
+                    ),
+                    _buildDashboardCard(
+                      context,
+                      title: 'Investments',
+                      icon: Icons.trending_up,
+                      backgroundColor: Colors.blue.shade600,
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => InvestmentScreen()),
+                      ),
+                    ),
+                    _buildDashboardCard(
+                      context,
+                      title: 'Meetings',
+                      icon: Icons.group,
+                      backgroundColor: Colors.purple.shade600,
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => MeetingsScreen()),
+                      ),
+                    ),
+                    _buildDashboardCard(
+                      context,
+                      title: 'Budget',
+                      icon: Icons.account_balance_wallet,
+                      backgroundColor: const Color.fromARGB(255, 208, 171, 5),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => BudgetScreen()),
+                      ),
+                    ),
+                    _buildDashboardCard(
+                      context,
+                      title: 'Goal',
+                      icon: FontAwesomeIcons.bullseye,
+                      backgroundColor: const Color.fromARGB(255, 191, 109, 3),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => GoalScreen()),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
