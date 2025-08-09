@@ -38,6 +38,7 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   community_material_icon: ^5.4.55
   google_fonts: ^6.1.0
+  image_picker: ^0.8.7+4
   
 
 

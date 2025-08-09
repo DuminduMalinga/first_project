@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -20,6 +22,8 @@ class _ProfileScreenState extends State<ProfileScreen>
   final _birthdayController = TextEditingController();
   DateTime? selectedDate;
 
+  File? _profileImage;
+
   @override
   void initState() {
     super.initState();
@@ -37,6 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     _emailController.dispose();
     _phoneController.dispose();
     _birthdayController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -59,6 +64,22 @@ class _ProfileScreenState extends State<ProfileScreen>
         selectedDate = picked;
         _birthdayController.text = DateFormat('yyyy-MM-dd').format(picked);
       });
+    }
+  }
+
+  Future<void> _pickImage() async {
+    try {
+      final XFile? pickedFile = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+      );
+
+      if (pickedFile != null) {
+        setState(() {
+          _profileImage = File(pickedFile.path);
+        });
+      }
+    } catch (e) {
+      print('Error picking image: $e');
     }
   }
 
@@ -101,13 +122,21 @@ class _ProfileScreenState extends State<ProfileScreen>
                   children: [
                     const SizedBox(height: 20),
                     Center(
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundColor: Colors.teal,
-                        child: Icon(
-                          Icons.person,
-                          size: 50,
-                          color: Colors.white,
+                      child: GestureDetector(
+                        onTap: _pickImage,
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundColor: Colors.teal,
+                          backgroundImage: _profileImage != null
+                              ? FileImage(_profileImage!)
+                              : null,
+                          child: _profileImage == null
+                              ? const Icon(
+                                  Icons.person,
+                                  size: 50,
+                                  color: Colors.white,
+                                )
+                              : null,
                         ),
                       ),
                     ),
@@ -168,14 +197,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: _saveChanges,
-                      child: const Text(
-                        'Save Changes',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.teal,
                         padding: const EdgeInsets.symmetric(
@@ -184,6 +205,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                         ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      child: const Text(
+                        'Save Changes',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
                         ),
                       ),
                     ),
