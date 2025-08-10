@@ -13,7 +13,7 @@ class _InvestmentScreenState extends State<InvestmentScreen>
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _expectedReturnController =
       TextEditingController();
-
+  final _formKey = GlobalKey<FormState>();
   String _selectedType = 'stocks';
   String _selectedStatus = 'Active';
   DateTime? _investmentDate;
@@ -40,22 +40,50 @@ class _InvestmentScreenState extends State<InvestmentScreen>
     super.dispose();
   }
 
+  void resetForm() {
+    _formKey.currentState?.reset();
+    setState(() {
+      //_selectedType = null;
+      _investmentDate = null;
+    });
+    _amountController.clear();
+    _expectedReturnController.clear();
+  }
+
   void _saveInvestment() {
     double? amount = double.tryParse(_amountController.text);
+
     if (amount == null || amount <= 0 || _investmentDate == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please Fill all required fields with valid values!'),
+          content: Text('Please fill all required fields with valid values!'),
         ),
       );
       return;
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Investment Saved Successfully!')),
+
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text(
+          'Investment saved:\n'
+          'Type: $_selectedType\n'
+          'Amount: ${_amountController.text}\n'
+          'Expected Return: ${_expectedReturnController.text.isEmpty ? "N/A" : _expectedReturnController.text}\n'
+          'Date: ${_investmentDate!.year}-${_investmentDate!.month.toString().padLeft(2, '0')}-${_investmentDate!.day.toString().padLeft(2, '0')}\n'
+          'Status: $_selectedStatus',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              resetForm();
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
     );
-    _amountController.clear();
-    _expectedReturnController.clear();
-    setState(() => _investmentDate = null);
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -213,7 +241,7 @@ class _InvestmentScreenState extends State<InvestmentScreen>
                         filled: true,
                         fillColor: Color.fromARGB(255, 240, 226, 186),
                       ),
-                      items: ['Active', 'Closed', 'Pendeing']
+                      items: ['Active', 'Closed', 'Pending']
                           .map(
                             (status) => DropdownMenuItem(
                               value: status,

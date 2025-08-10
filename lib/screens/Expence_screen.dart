@@ -14,6 +14,7 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
   String? selectedPaymentMethod;
   DateTime? selectedDate;
   final descriptionController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   final List<String> expenseTypes = [
     'Food',
@@ -39,6 +40,17 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
     amountController.dispose();
     descriptionController.dispose();
     super.dispose();
+  }
+
+  void resetForm() {
+    _formKey.currentState?.reset();
+    setState(() {
+      selectedExpenseType = null;
+      selectedPaymentMethod = null;
+      selectedDate = null;
+    });
+    amountController.clear();
+    descriptionController.clear();
   }
 
   void pickDate() async {
@@ -82,33 +94,37 @@ class _ExpenseScreenState extends State<ExpenseScreen> {
       return;
     }
 
-    String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate!);
-    double amount = double.tryParse(amountController.text) ?? 0.0;
-
-    if (amount <= 0) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Please enter a valid amount')));
+    double? amount = double.tryParse(amountController.text);
+    if (amount == null || amount <= 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter a valid amount')),
+      );
       return;
     }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          'Expense saved:\nType: $selectedExpenseType\nAmount: ${amountController.text}\nDate: $formattedDate',
+    String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate!);
+
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text(
+          'Income saved:\n'
+          'Type: $selectedExpenseType\n'
+          'Amount: ${amountController.text}\n'
+          'Payment: $selectedPaymentMethod\n'
+          'Date: $formattedDate',
         ),
-        duration: const Duration(seconds: 3),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              resetForm();
+            },
+            child: const Text('OK'),
+          ),
+        ],
       ),
     );
-
-    // Clear fields
-    setState(() {
-      selectedExpenseType = null;
-      selectedPaymentMethod = null;
-      amountController.clear();
-      descriptionController.clear();
-      selectedDate = null;
-    });
   }
 
   @override

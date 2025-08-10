@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // For date formatting
+import 'package:intl/intl.dart';
 
 class IncomeScreen extends StatefulWidget {
   const IncomeScreen({super.key});
@@ -12,6 +12,8 @@ class _IncomeScreenState extends State<IncomeScreen>
     with SingleTickerProviderStateMixin {
   final amountController = TextEditingController();
   final descriptionController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   String? selectedIncomeType;
   DateTime? selectedDate;
 
@@ -41,6 +43,50 @@ class _IncomeScreenState extends State<IncomeScreen>
     _controller.dispose();
     amountController.dispose();
     super.dispose();
+  }
+
+  void resetForm() {
+    _formKey.currentState?.reset();
+    setState(() {
+      selectedIncomeType = null;
+      selectedDate = null;
+    });
+    amountController.clear();
+    descriptionController.clear();
+  }
+
+  void saveIncome() {
+    if (selectedIncomeType == null ||
+        amountController.text.isEmpty ||
+        selectedDate == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Please fill all fields')));
+      return;
+    }
+
+    String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate!);
+
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text(
+          'Income saved:\n'
+          'Type: $selectedIncomeType\n'
+          'Amount: ${amountController.text}\n'
+          'Date: $formattedDate',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              resetForm();
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   void pickDate() async {
@@ -73,33 +119,20 @@ class _IncomeScreenState extends State<IncomeScreen>
     }
   }
 
-  void saveIncome() {
-    if (selectedIncomeType == null ||
-        amountController.text.isEmpty ||
-        selectedDate == null) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Please fill all fields')));
-      return;
-    }
+  // ScaffoldMessenger.of(context).showSnackBar(
+  //   SnackBar(
+  //     content: Text(
+  //       'Income saved:\nType: $selectedIncomeType\nAmount: ${amountController.text}\nDate: $formattedDate',
+  //     ),
+  //   ),
+  // );
 
-    String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate!);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          'Income saved:\nType: $selectedIncomeType\nAmount: ${amountController.text}\nDate: $formattedDate',
-        ),
-      ),
-    );
-
-    // Clear form
-    setState(() {
-      selectedIncomeType = null;
-      amountController.clear();
-      selectedDate = null;
-    });
-  }
+  //   setState(() {
+  //     selectedIncomeType = null;
+  //     amountController.clear();
+  //     selectedDate = null;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
