@@ -6,6 +6,7 @@ import 'Expence_screen.dart';
 import 'Investments_screen.dart';
 import 'Meetings_screen.dart';
 import 'Budget_screen.dart';
+import 'Profile_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -22,6 +23,17 @@ class DashboardScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ProfileScreen()),
+              );
+            },
+          ),
+        ],
       ),
       body: Container(
         decoration: const BoxDecoration(

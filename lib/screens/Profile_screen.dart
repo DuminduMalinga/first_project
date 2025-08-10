@@ -46,6 +46,21 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 
   void _saveChanges() {
+    final name = _nameController.text.trim();
+    final email = _emailController.text.trim();
+    final phoneNumber = _phoneController.text.trim();
+    final birthdate = _birthdayController.text.trim();
+
+    if (name.isEmpty ||
+        email.isEmpty ||
+        phoneNumber.isEmpty ||
+        birthdate.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Please fill all fields')));
+      return;
+    }
+
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(const SnackBar(content: Text('Profile saved Successfully')));
